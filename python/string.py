@@ -34,16 +34,27 @@ def modify(string):
 def search(src: str, target):
     print("------------search-------------")
 
+    # 遍历
+    print('遍历')
+    for letter in src:  # 第一个实例
+        print(letter, end="")
+    print()
+    print()
+
     # 查找，返回index，找不到 抛出异常 ValueError: substring not found
     # print(src.index(target, 0, len(src)))
 
     # 查找，返回index，找不到 返回-1
+    print('find')
     print(src.find(target))
     print(src.find(target, 0, len(src)))
+    print()
 
     # target在src内出现的次数
+    print('count')
     print(src.count(target))
     print(src.count(target, 0, len(src)))
+    print()
 
     # startWith  endWith
     print(src + " startswith " + target + " :%s" % src.startswith(target))
