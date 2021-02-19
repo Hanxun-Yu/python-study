@@ -28,11 +28,11 @@ def _print():
     %G    指数(E)或浮点数 (根据显示长度)
     %%    字符"%"
     """
-    
+
     # 不换行 指定end=""
     print("content", end="")
     print()
-    
+
     # 格式化
     print("My name is %s and weight is %d kg!" % ('Zara', 29))
     print("{} {}".format("hello", "world"))

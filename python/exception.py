@@ -51,6 +51,7 @@ def catch_exception_2():
     finally:
         print("finally")
 
+
 def throw_exception():
     try:
         # 抛出异常
@@ -65,4 +66,3 @@ if __name__ == '__main__':
     # throw_exception()
     # catch_exception()
     catch_exception_2()
-

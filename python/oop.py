@@ -46,13 +46,13 @@ class Employee:
 if __name__ == '__main__':
     # 实例化
     emp1 = Employee("Zara", 2000)
-    
+
     # 调用对象函数
     emp1.display_employee()
-    
+
     # 类属性
     print(Employee.empCount)
-    
+
     # 类属性 通过对象访问
     print(emp1.empCount)
 
@@ -70,5 +70,5 @@ if __name__ == '__main__':
 
     # 警告 访问protected函数
     emp1._protected_fun()
-    
-    print("type(emp1):",type(emp1))
+
+    print("type(emp1):", type(emp1))
