@@ -11,6 +11,7 @@
 
 import numpy as np
 
+
 def random():
     print("--------random---------")
 
@@ -20,7 +21,7 @@ def random():
     """
     print("np.random.rand(2, 3) =>\n", np.random.rand(2, 3))
     print()
-    
+
     """
     np.random.random(size)
     返回指定size的[0,1)随机数矩阵，random_sample、ranf、sample和它一样
@@ -34,5 +35,18 @@ def random():
     print("np.random.randint(1, 10) =>", np.random.randint(1, 10))
     print()
 
+
+def calculate():
+    print("--------calculate---------")
+    arr = np.array([[1, 2], [3, 4]])
+
+    # 平均值
+    print("mean axis=0 =>", np.mean(arr, axis=0))  # axis表示维数 第几维对应位置数相加 
+    print("mean axis=0 =>", np.mean(arr, axis=1))
+
+    return
+
+
 if __name__ == '__main__':
-    random()
+    # random()
+    calculate()
