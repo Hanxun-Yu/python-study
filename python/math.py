@@ -51,6 +51,7 @@ def integer():
     取整
     :return: 
     """
+    print("--------integer---------")
 
     import math
 
@@ -64,6 +65,17 @@ def integer():
     print("math.trunc(3.5):", math.trunc(3.5))
 
 
+def random():
+    print("--------random---------")
+
+    import random
+
+    print("random.randint(0, 9) =>", random.randint(0, 9))  # 整数 范围0-9
+    print("random.uniform(0, 9) =>", random.uniform(0, 9))  # 浮点数 范围0-9
+    print("random.random() =>", random.random())  # 浮点数 范围0-1
+
+
 if __name__ == '__main__':
     # _round()
     integer()
+    random()
