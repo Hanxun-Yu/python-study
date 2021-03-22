@@ -27,13 +27,21 @@ def init_array():
     print_arr(arr)
     print()
 
+    # 一维随机值创建
+    print("np.empty")
+    arr = np.empty(10, dtype=int)
+    print_arr(arr)
+    print()
+
     shape = [3, 2]
 
-    # 随机值创建
+    # 多维 随机值创建
     print("np.empty")
     arr = np.empty(shape, dtype=int)
     print_arr(arr)
     print()
+
+    
 
     # 0值创建
     print("np.zeros")
@@ -170,6 +178,6 @@ def print_arr(arr: np.ndarray):
 
 
 if __name__ == '__main__':
-    # init_array()
-    operate_array()
+    init_array()
+    # operate_array()
     # read_array()
