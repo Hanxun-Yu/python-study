@@ -46,7 +46,8 @@ def search(src: str, target):
 
     # 查找，返回index，找不到 返回-1
     print('find')
-    print(src.find(target))
+    print("find:%d" % src.find(target))  # find start at head
+    print("rfind:%d" % src.rfind(target))  # find start at tail
     print(src.find(target, 0, len(src)))
     print()
 

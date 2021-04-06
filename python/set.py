@@ -112,5 +112,5 @@ def _dict():
 
 if __name__ == '__main__':
     # array()
-    # array_modify()
-    _dict()
+    array_modify()
+    # _dict()
