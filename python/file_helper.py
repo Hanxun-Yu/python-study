@@ -78,8 +78,8 @@ class FileHelper:
     
     @staticmethod
     def open_file(file_path):
-        if not FileHelper.exists(file_path) or FileHelper.is_file(file_path):
-            raise RuntimeError("\"%s\" is not fold or not exists" % file_path)
+        if not FileHelper.exists(file_path) or not FileHelper.is_file(file_path):
+            raise RuntimeError("\"%s\" is not file or not exists" % file_path)
         
         os.startfile(file_path)
 
