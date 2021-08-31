@@ -62,17 +62,29 @@ class FileHelper:
         fo.close()
         return data
 
+    @staticmethod
+    def is_file(file_path):
+        return os.path.isfile(file_path)
+
+    @staticmethod
+    def list_file(fold_path):
+        if not FileHelper.exists(fold_path) or FileHelper.is_file(fold_path):
+            raise RuntimeError("\"%s\" is not fold or not exists" % fold_path)
+
+        ret = []
+        for sub_file in os.listdir(fold_path):
+            ret.append(fold_path + os.path.sep + sub_file)
+        return ret
+
 
 if __name__ == '__main__':
     print("Hello Han-xun Yu")
 
-    path = './dawa/dawd.pg'
+    # path = './dawa/dawd.pg'
     # FileHelper.create_empty_file('./dawa/dawd.pg')
-    print(FileHelper.get_filename(path))
-    print(FileHelper.get_filename(path, False))
-    print(FileHelper.get_file_ext(path))
-    print(FileHelper.get_file_dir(path))
+    # print(FileHelper.get_filename(path))
+    # print(FileHelper.get_filename(path, False))
+    # print(FileHelper.get_file_ext(path))
+    # print(FileHelper.get_file_dir(path))
 
-    # 获取当前脚本文件路径
-    this_pyfile_path = __file__
-    print(this_pyfile_path)
+    print(FileHelper.list_file("E:\source\coin\QuantTrade"))
