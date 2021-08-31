@@ -75,6 +75,13 @@ class FileHelper:
         for sub_file in os.listdir(fold_path):
             ret.append(fold_path + os.path.sep + sub_file)
         return ret
+    
+    @staticmethod
+    def open_file(file_path):
+        if not FileHelper.exists(file_path) or FileHelper.is_file(file_path):
+            raise RuntimeError("\"%s\" is not fold or not exists" % file_path)
+        
+        os.startfile(file_path)
 
 
 if __name__ == '__main__':
