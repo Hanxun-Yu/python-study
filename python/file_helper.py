@@ -80,8 +80,12 @@ class FileHelper:
     def open_file(file_path):
         if not FileHelper.exists(file_path) or not FileHelper.is_file(file_path):
             raise RuntimeError("\"%s\" is not file or not exists" % file_path)
-        
-        os.startfile(file_path)
+
+        if sys.platform != "win32":
+            import subprocess
+            subprocess.call(["open", file_path])
+        else:
+            os.startfile(file_path)
 
 
 if __name__ == '__main__':
