@@ -58,6 +58,13 @@ class FileHelper:
         fo.close()
 
     @staticmethod
+    def write_line_file(file_path, content):
+        fo = open(file_path, "a")
+        fo.write(content)
+        fo.write("\n")
+        fo.close()
+
+    @staticmethod
     def read_file(file_path):
         fo = open(file_path, "r")
         data = fo.read()
@@ -107,4 +114,7 @@ if __name__ == '__main__':
     # print(FileHelper.get_file_ext(path))
     # print(FileHelper.get_file_dir(path))
 
-    print(FileHelper.list_file("E:\source\coin\QuantTrade"))
+    # print(FileHelper.list_file("E:\source\coin\QuantTrade"))
+
+    FileHelper.write_line_file("a.txt","hah\n")
+
