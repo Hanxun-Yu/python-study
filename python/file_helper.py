@@ -9,6 +9,8 @@
 
 """
 import os
+import sys
+import shutil
 
 
 class FileHelper:
@@ -75,7 +77,14 @@ class FileHelper:
         for sub_file in os.listdir(fold_path):
             ret.append(fold_path + os.path.sep + sub_file)
         return ret
-    
+
+    @staticmethod
+    def delete_file(file_path):
+        if FileHelper.is_file(file_path):
+            os.remove(file_path)
+        else:
+            shutil.rmtree(file_path)
+
     @staticmethod
     def open_file(file_path):
         if not FileHelper.exists(file_path) or not FileHelper.is_file(file_path):
