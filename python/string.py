@@ -16,6 +16,7 @@ def substring(string):
     # 下标切割
     print("string[1:5]:", string[1:5])
     print("string[:5]:", string[:5])
+    print("string[:-2]:", string[:-2])
 
     # 移除头尾<指定字符>
     print("string.strip(\"P\"):", string.strip("P"))
@@ -81,9 +82,9 @@ def encode(s, c):
 
 
 if __name__ == '__main__':
-    string = "python Runoobp"
+    string = "python RunoobP"
 
     substring(string)
-    modify(string)
-    search(string, "p")
-    encode('abc', 'b')
+    # modify(string)
+    # search(string, "p")
+    # encode('abc', 'b')

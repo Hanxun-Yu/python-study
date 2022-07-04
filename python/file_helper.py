@@ -56,6 +56,12 @@ class FileHelper:
         fo.close()
 
     @staticmethod
+    def write_file_add(file_path, content):
+        fo = open(file_path, "a")
+        fo.write(content)
+        fo.close()
+
+    @staticmethod
     def read_file(file_path):
         fo = open(file_path, "r")
         data = fo.read()
@@ -75,12 +81,12 @@ class FileHelper:
         for sub_file in os.listdir(fold_path):
             ret.append(fold_path + os.path.sep + sub_file)
         return ret
-    
+
     @staticmethod
     def open_file(file_path):
         if not FileHelper.exists(file_path) or not FileHelper.is_file(file_path):
             raise RuntimeError("\"%s\" is not file or not exists" % file_path)
-        
+
         os.startfile(file_path)
 
 
