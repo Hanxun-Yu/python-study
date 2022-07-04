@@ -9,6 +9,8 @@
 
 """
 import os
+import sys
+import shutil
 
 
 class FileHelper:
@@ -56,6 +58,13 @@ class FileHelper:
         fo.close()
 
     @staticmethod
+    def write_line_file(file_path, content):
+        fo = open(file_path, "a")
+        fo.write(content)
+        fo.write("\n")
+        fo.close()
+
+    @staticmethod
     def write_file_add(file_path, content):
         fo = open(file_path, "a")
         fo.write(content)
@@ -83,11 +92,22 @@ class FileHelper:
         return ret
 
     @staticmethod
+    def delete_file(file_path):
+        if FileHelper.is_file(file_path):
+            os.remove(file_path)
+        else:
+            shutil.rmtree(file_path)
+
+    @staticmethod
     def open_file(file_path):
         if not FileHelper.exists(file_path) or not FileHelper.is_file(file_path):
             raise RuntimeError("\"%s\" is not file or not exists" % file_path)
 
-        os.startfile(file_path)
+        if sys.platform != "win32":
+            import subprocess
+            subprocess.call(["open", file_path])
+        else:
+            os.startfile(file_path)
 
 
 if __name__ == '__main__':
