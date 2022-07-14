@@ -58,7 +58,7 @@ class FileHelper:
         fo.close()
 
     @staticmethod
-    def write_line_file(file_path, content):
+    def write_file_add_line(file_path, content):
         fo = open(file_path, "a")
         fo.write(content)
         fo.write("\n")
