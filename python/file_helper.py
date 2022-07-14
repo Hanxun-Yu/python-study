@@ -93,10 +93,11 @@ class FileHelper:
 
     @staticmethod
     def delete_file(file_path):
-        if FileHelper.is_file(file_path):
-            os.remove(file_path)
-        else:
-            shutil.rmtree(file_path)
+        if FileHelper.exists(file_path):
+            if FileHelper.is_file(file_path):
+                os.remove(file_path)
+            else:
+                shutil.rmtree(file_path)
 
     @staticmethod
     def open_file(file_path):
