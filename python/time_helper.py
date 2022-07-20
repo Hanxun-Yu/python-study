@@ -21,8 +21,8 @@ class TimeConst:
 
 
 class TimeHelper:
-    # def cur_ts_ms(self):
-    #     return int(time.time() * 1000)
+    def millisecond_cur(self):
+        return int(time.time() * 1000)
 
     def second_cur(self) -> float:
         """
@@ -88,6 +88,9 @@ class TimeHelper:
 
 if __name__ == '__main__':
     th = TimeHelper()
+    
+    print("cur_ts_ms:" + str(th.millisecond_cur()))
+
     print("cur_ts_s:" + str(th.second_cur()))
 
     cur_datetime = th.datetime_cur()

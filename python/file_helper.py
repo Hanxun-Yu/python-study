@@ -82,13 +82,22 @@ class FileHelper:
         return os.path.isfile(file_path)
 
     @staticmethod
-    def list_file(fold_path):
+    def list_file(fold_path, isAbs=True):
+        """
+        
+        :param fold_path: 
+        :param isAbs: 是否返回绝对路径 
+        :return: 
+        """
         if not FileHelper.exists(fold_path) or FileHelper.is_file(fold_path):
             raise RuntimeError("\"%s\" is not fold or not exists" % fold_path)
 
         ret = []
         for sub_file in os.listdir(fold_path):
-            ret.append(fold_path + os.path.sep + sub_file)
+            if isAbs:
+                ret.append(fold_path + os.path.sep + sub_file)
+            else:
+                ret.append(sub_file)
         return ret
 
     @staticmethod
