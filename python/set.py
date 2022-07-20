@@ -79,6 +79,13 @@ def array_modify():
     print("arr:", arr)
 
 
+def array_operation():
+    arr1 = [1, 2]
+    arr2 = [3, 4]
+    result = [i + j for i, j in zip(arr1, arr2)]
+    print("arr1+arr2:", result)
+
+
 def _dict():
     """
     类似于Java Map
@@ -87,15 +94,15 @@ def _dict():
     # 不允许同一个键出现两次。创建时如果同一个键被赋值两次，后一个值会被记住
     dict = {'Name': 'Zara', 'Age': 7, 'Class': 'First'}
     print("dict:", dict)
-    
+
     # 读
     print("dict['Name']:", dict['Name'])
     print()
-    
+
     # 遍历 key方式
     for key in dict.keys():
         print("dict[%s]:" % key, dict[key])
-        
+
     # 遍历 元组方式
     for tuple_item in dict.items():
         print(tuple_item)
@@ -107,10 +114,9 @@ def _dict():
     del dict  # 删除字典   后续再读将抛出 UnboundLocalError: local variable 'dict' referenced before assignment
     # dict['Age']
 
-    
-
 
 if __name__ == '__main__':
     # array()
-    array_modify()
+    # array_modify()
     # _dict()
+    array_operation()
