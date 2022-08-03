@@ -41,8 +41,6 @@ def init_array():
     print_arr(arr)
     print()
 
-    
-
     # 0值创建
     print("np.zeros")
     arr = np.zeros(shape, dtype=int)
@@ -113,19 +111,23 @@ def operate_array():
     print()
 
     # 转置
-    arr = np.array([[1, 2, 3]])
+    print("np.transpose()")
+    arr = np.array([[[1, 2, 3], [4, 5, 6], [7, 8, 9]]])
     print(arr.T)
     print(arr.transpose())
+    # 把第三维度放到第一维度
+    print(arr.transpose(2, 0, 1))
+
     print()
 
     # 组合2个数组
     a_arr = np.array([1, 2, 3])
     b_arr = np.array([4, 5, 6])
     print(np.concatenate((a_arr, b_arr), axis=0))  # axis=0 ,axis为在哪个维度上进行拼接
-    
+
     a_arr = np.array([[1, 2], [3, 4]])
     b_arr = np.array([[5, 6]])
-    print(np.concatenate((a_arr, b_arr.T), axis=1))  
+    print(np.concatenate((a_arr, b_arr.T), axis=1))
 
     return
 
@@ -178,6 +180,6 @@ def print_arr(arr: np.ndarray):
 
 
 if __name__ == '__main__':
-    init_array()
-    # operate_array()
+    # init_array()
+    operate_array()
     # read_array()
