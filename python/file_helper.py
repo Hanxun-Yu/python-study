@@ -65,6 +65,15 @@ class FileHelper:
         fo.close()
 
     @staticmethod
+    def write_file_insert_line(file_path, line_index, content):
+        """
+        从行中进行插入
+        待实现
+        """
+
+        pass
+
+    @staticmethod
     def write_file_add(file_path, content):
         fo = open(file_path, "a")
         fo.write(content)

@@ -1,4 +1,11 @@
 # -*- coding: utf-8 -*-
+# @Time    : 2023/3/2 12:45
+# @Author  : Hanxun Yu
+# @Email   :
+# @File    : time_helper.py
+# @Software: PyCharm
+
+# -*- coding: utf-8 -*-
 # @Time    : 2021/3/19 10:36
 # @Author  : Han-xun Yu
 # @Email   : yuhanxun@126.com
@@ -21,53 +28,97 @@ class TimeConst:
 
 
 class TimeHelper:
-    def millisecond_cur(self):
+
+    @staticmethod
+    def timestamp_ms():
+        """
+        当前时间戳 毫秒
+        :return:
+        """
         return int(time.time() * 1000)
 
-    def second_cur(self) -> float:
+    @staticmethod
+    def timestamp_s() -> float:
         """
         当前时间戳 秒
+        :return:
         """
         return int(time.time())
 
-    def second_from_datetime(self, dtobj):
+    @staticmethod
+    def __ts_s_from_datetime(dtobj):
         """
         datetime对象 转 秒
         """
         return int(dtobj.timestamp())
 
-    def ms_from_datetime(self, dtobj):
-        """
-        datetime对象 转 毫秒
-        """
+    @staticmethod
+    def __ts_ms_from_datetime(dtobj):
         return int(dtobj.timestamp() * 1000)
 
-    def second_daystart_from_datetime(self, dtobj):
-        """
-        datetime对象 当天开始时刻 秒
-        """
-        newdt = dt.datetime(dtobj.year, dtobj.month, dtobj.day, 0, 0, 0)
-        return self.second_from_datetime(newdt)
-
-    def datetime_cur(self):
-        """
-        返回datetime对象 当前时间
-        """
-        return dt.datetime.now()
-
-    def datetime_sometime_from_second(self, second):
+    @staticmethod
+    def datetime_from_second(second):
         return dt.datetime.fromtimestamp(second)
 
-    def datetime_daydelta(self, dtobj: dt.datetime, delta):
-        return dtobj + dt.timedelta(days=delta)
+    @staticmethod
+    def second_of_daystart_from_second(second):
+        """
+        返回 当天开始时刻 秒
+        """
+        dtobj = TimeHelper.datetime_from_second(second)
+        newdt = dt.datetime(dtobj.year, dtobj.month, dtobj.day, 0, 0, 0)
+        return TimeHelper.__ts_s_from_datetime(newdt)
+
+    @staticmethod
+    def second_day_delta(day_second, day_delta):
+        """
+        比如
+        day_second:2023-02-03 13:00:00
+        day_delta: 2
+
+        返回 2023-02-01 13:00:00
+        :param day_second: 该天时间戳
+        :param delta: 天数 偏移量
+        :return:
+        """
+        day_datetime = TimeHelper.datetime_from_second(day_second)
+        day_datetime += dt.timedelta(days=day_delta)
+
+        return TimeHelper.__ts_s_from_datetime(day_datetime)
+
+    @staticmethod
+    def day_count(day1_second, day2_second) -> int:
+        """
+        返回从day1_second到day2_second 有多少天，闭区间
+        :param day1_second:
+        :param day2_second:
+        :return:
+        """
+        day1_second = TimeHelper.second_of_daystart_from_second(day1_second)
+        day2_second = TimeHelper.second_of_daystart_from_second(day2_second)
+
+        return int(abs(day1_second - day2_second) / (24 * 60 * 60) + 1)
 
     def format_from_second(self, second):
         return self.format_from_datetime(dt.datetime.fromtimestamp(second))
 
-    def format_from_ms(self, ms):
-        return self.format_from_datetime(dt.datetime.fromtimestamp(ms / 1000))
+    @staticmethod
+    def format_to_YYYYmmdd_from_second(second):
+        return dt.datetime.fromtimestamp(second).strftime('%Y%m%d')
 
-    def format_from_datetime(self, dtobj: dt.datetime):
+    @staticmethod
+    def format_to_HHMMSS_from_second(second):
+        return dt.datetime.fromtimestamp(second).strftime('%H:%M:%S')
+
+    @staticmethod
+    def format_to_second_from_YYYYmmdd(str):
+        dtobj = dt.datetime.now()
+        dtobj = dtobj.strptime(str, '%Y%m%d')
+        second = TimeHelper.__ts_s_from_datetime(dtobj)
+        return TimeHelper.second_of_daystart_from_second(second)
+
+    @staticmethod
+    def format_to_YYYYmmdd_HHMMSS_from_second(second):
         """
         %d-以零填充的十进制数字表示的月份的第几天。
         %m-以零填充的十进制数表示的月份。
@@ -77,29 +128,32 @@ class TimeHelper:
         %S-秒，用零填充的十进制数。
         %f微秒为十进制数，左边补零
         """
-        return dtobj.strftime('[%Y-%m-%d %H:%M:%S]')
-    
-    def format_filename_from_second(self, second):
-        return self.format_filename_from_datetime(dt.datetime.fromtimestamp(second))
-    
-    def format_filename_from_datetime(self, dtobj: dt.datetime):
-        return dtobj.strftime('[%Y%m%d_%H%M%S]')
+        return dt.datetime.fromtimestamp(second).strftime('[%Y-%m-%d %H:%M:%S]')
+
+    # def format_filename_from_second(self, second):
+    #     return self.format_filename_from_datetime(dt.datetime.fromtimestamp(second))
+    #
+    # def format_filename_from_datetime(self, dtobj: dt.datetime):
+    #     return dtobj.strftime('[%Y%m%d_%H%M%S]')
 
 
 if __name__ == '__main__':
-    th = TimeHelper()
-    
-    print("cur_ts_ms:" + str(th.millisecond_cur()))
+    second_now = TimeHelper.timestamp_s()
+    print("cur_ts_s:{} format:{}".format(str(second_now), TimeHelper.format_to_YYYYmmdd_HHMMSS_from_second(second_now)))
 
-    print("cur_ts_s:" + str(th.second_cur()))
+    second_now_minus_24day = TimeHelper.second_day_delta(second_now, -24)
+    print("second_now_minus_24day:{} format:{}".format(str(second_now_minus_24day),
+                                                       TimeHelper.format_to_YYYYmmdd_HHMMSS_from_second(
+                                                           second_now_minus_24day)))
 
-    cur_datetime = th.datetime_cur()
-    print("cur_datetime:" + str(cur_datetime))
-    cur_minus_24day_datetime = th.datetime_daydelta(cur_datetime, -24)
-    print("cur_datetime -24:" + str(cur_minus_24day_datetime))
-    day_start_s = th.second_daystart_from_datetime(cur_minus_24day_datetime)
-    print("day_start_s:" + str(day_start_s))
-    print("cur_minus_24day_datetime:" + str(cur_minus_24day_datetime))
+    second_day_start = TimeHelper.second_of_daystart_from_second(second_now)
+    print("second_day_start:{} format:{}".format(str(second_day_start),
+                                                 TimeHelper.format_to_YYYYmmdd_HHMMSS_from_second(second_day_start)))
 
-    print("sometime_s_datetime:" + th.format_from_second(cur_datetime.timestamp()))
-    print("sometime_s_datetime:" + th.format_from_ms(cur_datetime.timestamp() * 1000))
+    second2 = TimeHelper.format_to_second_from_YYYYmmdd('20230225')
+    print("format_to_second_from_YYYYmmdd:" + str(second2))
+    print("format_to_YYYYmmdd_from_second:" + TimeHelper.format_to_YYYYmmdd_from_second(second2))
+    print("format_to_HHMMSS_from_second:" + TimeHelper.format_to_HHMMSS_from_second(second_now))
+
+    # -----------------------------------
+    print("daycount:{}".format(TimeHelper.day_count(second_now, second_now_minus_24day)))
